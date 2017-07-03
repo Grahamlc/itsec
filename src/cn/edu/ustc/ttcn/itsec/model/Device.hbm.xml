@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+	<class name="cn.edu.ustc.ttcn.itsec.model.Device" table="s_te_device" lazy="false">
+		<id name="autoId" column="AutoId" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		<property name="deviceName" column="DeviceName"/>
+		<property name="method" column="Method" />
+		<set name="testObjects">
+			<key column="DeviceId"></key>
+			<one-to-many class="cn.edu.ustc.ttcn.itsec.model.TestObject"/>
+		</set>
+	</class>
+	
+
+</hibernate-mapping>

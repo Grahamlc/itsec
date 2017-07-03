@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+		
+	<class name="cn.edu.ustc.ttcn.itsec.model.Role" table="s_te_role" lazy="false">
+		<id name="roleId" column="Role_Id" type="java.lang.Integer">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="roleName" column="Role_Name"  />
+
+		<set name="testerOfSystem" lazy="false">
+			<key column="RoleId"></key>
+			<one-to-many class="cn.edu.ustc.ttcn.itsec.model.TesterOfSystem"/>
+		</set>
+
+	</class>
+	
+	
+	
+</hibernate-mapping>

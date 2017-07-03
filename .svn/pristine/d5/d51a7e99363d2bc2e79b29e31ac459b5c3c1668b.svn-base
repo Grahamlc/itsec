@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.edu.ustc.ttcn.itsec.model.Score" table="d_cp_score" lazy="false" dynamic-update="true">
+		<id name="autoId" column="AutoId" type="java.lang.Integer">
+			<generator class="increment"></generator> 
+		</id>
+		
+		<many-to-one name="testSystem" column="TestSystem"></many-to-one>
+		
+		<many-to-one name="item" column="CpItem" update="false" ></many-to-one>
+		<property name="score" column="Score" />
+		<property name="num" column="Num"/>
+		
+	</class>
+</hibernate-mapping>

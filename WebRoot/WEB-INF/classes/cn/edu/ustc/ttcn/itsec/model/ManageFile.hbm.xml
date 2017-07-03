@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.edu.ustc.ttcn.itsec.model.ManageFile" table="d_cp_file" lazy="false" >
+		<id name="autoId" column="AutoId" type="java.lang.Integer">
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="company" column="Company" class="cn.edu.ustc.ttcn.itsec.model.Company"/>
+		<property name="name" column="Name"/>
+		<property name="mainPoint" column="MainPoint"/>
+		<property name="status" column="Status"/>
+	</class>
+</hibernate-mapping>

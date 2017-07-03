@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="loginDao" class="cn.edu.ustc.ttcn.itsec.dao.LoginDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="superDao" class="cn.edu.ustc.ttcn.itsec.dao.SuperDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>  
+	</bean>
+	<bean id="reportDao" class="cn.edu.ustc.ttcn.itsec.dao.ReportDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>  
+	</bean>
+	<!-- 客户单位 -->
+	<bean id="companyDao" class="cn.edu.ustc.ttcn.itsec.dao.CompanyDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 项目 -->
+	<bean id="projectsDao" class="cn.edu.ustc.ttcn.itsec.dao.ProjectsDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="addProjectDao" class="cn.edu.ustc.ttcn.itsec.dao.AddProjectDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<bean id="objectDao" class="cn.edu.ustc.ttcn.itsec.dao.ObjectDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="deviceDao" class="cn.edu.ustc.ttcn.itsec.dao.DeviceDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="showSystemInfoDao" class="cn.edu.ustc.ttcn.itsec.dao.ShowSystemInfoDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	<bean id="writeItemDao" class="cn.edu.ustc.ttcn.itsec.dao.WriteItemDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	<bean id="testSystemDao" class="cn.edu.ustc.ttcn.itsec.dao.TestSystemDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	<bean id="testObjectDao" class="cn.edu.ustc.ttcn.itsec.dao.TestObjectDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	<bean id="showObjectDao" class="cn.edu.ustc.ttcn.itsec.dao.ShowObjectDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	<bean id="systemDao" class="cn.edu.ustc.ttcn.itsec.dao.SystemDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="showItemDao" class="cn.edu.ustc.ttcn.itsec.dao.ShowItemDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<bean id="selectObjectDao" class="cn.edu.ustc.ttcn.itsec.dao.SelectObjectDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="investInforDao" class="cn.edu.ustc.ttcn.itsec.dao.InvestInforDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="systemTesterDao" class="cn.edu.ustc.ttcn.itsec.dao.SystemTesterDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="scoreDao" class="cn.edu.ustc.ttcn.itsec.dao.ScoreDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="itemConDao" class="cn.edu.ustc.ttcn.itsec.dao.ItemConDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="conScoreDao" class="cn.edu.ustc.ttcn.itsec.dao.ConScoreDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<!-- 测评师 -->
+	<bean id="testerDao" class="cn.edu.ustc.ttcn.itsec.dao.TesterDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<!-- 项目编号 -->
+	<bean id="proNumDao" class="cn.edu.ustc.ttcn.itsec.dao.ProjectsNumberDaoForMysql">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>		
+	</bean>
+</beans>

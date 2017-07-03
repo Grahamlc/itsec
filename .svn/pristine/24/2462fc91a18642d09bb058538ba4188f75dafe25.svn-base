@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+	<class name="cn.edu.ustc.ttcn.itsec.model.Projects" table="d_cp_project" lazy="false">
+		<id name="autoId" column="AutoId" type="java.lang.Integer" length="20">
+			<generator class="increment"></generator>
+		</id>
+		<many-to-one name="company" column="Company" not-null="true"/>
+		<property name="date" column="Date" />
+		<property name="state" column="State"/>
+		<many-to-one name="responsor" column="Responsor"/>
+		
+		<set name="testSystems" order-by="autoId" lazy="false" cascade="delete" inverse="true">
+			<key column="Project"></key>
+			<one-to-many class="cn.edu.ustc.ttcn.itsec.model.TestSystem"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>

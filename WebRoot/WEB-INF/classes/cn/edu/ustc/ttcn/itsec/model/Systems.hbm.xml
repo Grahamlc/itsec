@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.edu.ustc.ttcn.itsec.model.Systems" table="s_te_system" lazy="false">
+		<id name="autoId" column="AutoId" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+
+		<!-- <property name="corId" column="CorId" not-null="true"/> -->
+		<many-to-one name="company" class="cn.edu.ustc.ttcn.itsec.model.Company" column="CorId" not-found="ignore">
+		</many-to-one>
+
+		<property name="sysName" column="SysName" />
+		<property name="secLevel" column="SecLevel" />
+		<property name="state" column="State" />
+		<property name="startDate" column="StartDate" />
+		<property name="endDate" column="EndDate" /> 
+		<property name="level" column="Level"/>
+		<property name="backId" column="BackId"/>
+		<set name="testSystem" order-by="autoId" cascade="delete" inverse="true" lazy = "false">
+		 	<key column="SysId"></key>
+		 	<one-to-many class="cn.edu.ustc.ttcn.itsec.model.TestSystem"/>
+		 </set>
+		<!--<one-to-one name="testSystem" property-ref="system" class="cn.edu.ustc.ttcn.itsec.model.TestSystem" />
+		 <set name="report" cascade="delete" inverse="true" order-by ="autoId" lazy="false">
+			<key column="TestSysId"></key>
+			<one-to-many class="cn.edu.ustc.ttcn.itsec.model.Reports"/>
+		</set> 
+		-->
+	</class>
+</hibernate-mapping>

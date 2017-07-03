@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>USTC-ITSEC信息管理平台</title>
+		<link rel="shortcut icon" href="images/title.jpg" type="image/x-icon";>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bootstrap/js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="jqueryw.js"></script>
+		<style type="text/css">
+			#div2{
+			 margin-top:30px;
+			 margin-left:-50px;
+			}
+			input{height:24px;width:160px;margin:5px 10px;}
+			.small{margin:10px 20px;font-size:15px;}
+			a{color:#2b2a2f;}
+			a:hover{color:black;}
+		</style>
+		<script type="text/javascript">
+			function logo_in(){
+				var bd=document.fm;
+				var userid=bd.userid.value;
+				if(userid==""){
+					alert("请输入您的工号/用户ID");
+					return false;
+				}
+				var password=bd.password.value;
+				if(password==""){
+					alert("请输入您的密码");
+					return false;
+				}
+				var pswd=bd.pswd.value;
+				if(password!=pswd){
+					alert("两次密码输入不一致,请重新输入");
+					return false;
+				}
+				var username=bd.username.value;
+				if(username==""){
+					alert("请输入您的姓名");
+					return false;
+				}
+				var telephone=bd.telephone.value;
+				if(telephone==""){
+					alert("请输入您的联系方式");
+					return false;
+				}
+				var officename=bd.officename.value;
+				if(officename==""){
+					alert("请输入您的单位名称");
+					return false;
+				}
+				var email=bd.email.value;
+				if(email==""){
+					alert("请输入您的电子邮箱");
+					return false;
+				}
+				var roleid=bd.roleid.value;
+				if(roleid==""){
+					alert("请输入角色ID");
+					return false;
+				}				
+			}
+		</script>
+	</head>
+	<body class="container-fluid">
+		<div id="div2">
+			<form name="fm"  method="post" action="">
+				<table width="350" style="background:#fff; border:1px solid #7d7d7d;" align="center">
+					<tr height="35px">
+						<td style="background:url(images/th.gif) repeat-x;text-align:center"><b>添加用户</b></td>
+					</tr>
+					<tr>
+						<td>
+							<table class="table table-bordered">
+								
+								<tr>
+									<td align="right" width="100">测评师:</td><td><input name="testername" type="text"></td>
+								</tr>
+								<tr>
+									<td align="right">联系方式:</td> <td><input name="telephone" type="text"></td>
+								</tr>								
+								<tr>
+									<td align="right">电子邮箱:</td> <td><input name="email" type="text"></td>
+								</tr>
+								
+							</table>
+							<input type="submit" value="添加" onClick="return logo_in()"  style="width:60px; margin-top:5px;margin-bottom:20px;margin-left:60px; height:25px; line-height:20px;"> 
+							<input type="reset" value="重置"  style="width:60px; height:25px;margin-bottom:20px;margin-top:5px; line-height:20px;">
+							<a href="Maright.jsp"><input type="button" value="取消" style="width:60px; height:25px;margin-bottom:20px;margin-top:5px; line-height:20px;"></a>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+
+	</body>
+</html>

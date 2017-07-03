@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="loginService" class="cn.edu.ustc.ttcn.itsec.service.LoginServiceImpl">
+    	<property name="loginDao">
+    		<ref bean="loginDao" />
+    	</property>
+    </bean>
+    <bean id="superService" class="cn.edu.ustc.ttcn.itsec.service.SuperServiceImpl">
+		<property name="superDao">
+			<ref bean="superDao"/>
+		</property>
+		<property name="loginDao">
+			<ref bean="loginDao"/>
+		</property>
+		<property name="companyDao">
+    		<ref bean="companyDao" />
+    	</property>
+    </bean>
+    <bean id="companyService" class="cn.edu.ustc.ttcn.itsec.service.CompanyServiceImpl">
+    	<property name="companyDao">
+    		<ref bean="companyDao" />
+    	</property>
+    </bean>
+    
+    <bean id="projectsService" class="cn.edu.ustc.ttcn.itsec.service.ProjectsServiceImpl">
+    	<property name="projectsDao">
+    		<ref bean="projectsDao" />
+    	</property>
+    </bean>
+    
+    <bean id="addProjectService" class="cn.edu.ustc.ttcn.itsec.service.AddProjectServiceImpl">
+    	<property name="addProjectDao">
+    		<ref bean="addProjectDao" />
+     	</property>
+    </bean>
+    <bean id="objectService" class="cn.edu.ustc.ttcn.itsec.service.ObjectServiceImpl">
+    	<property name="objectDao">
+    		<ref bean="objectDao" />
+    	</property>
+    </bean>
+    <bean id="deviceService" class="cn.edu.ustc.ttcn.itsec.service.DeviceServiceImpl">
+    	<property name="deviceDao">
+    		<ref bean="deviceDao" />
+    	</property>
+    </bean>
+    <bean id="showSystemInfoService" class="cn.edu.ustc.ttcn.itsec.service.ShowSystemInfoServiceImpl">
+    	<property name="showSystemInfoDao">
+    		<ref bean="showSystemInfoDao" />
+    	</property>
+    </bean>
+    <bean id="writeItemService" class="cn.edu.ustc.ttcn.itsec.service.WriteItemServiceImpl">
+    	<property name="writeItemDao">
+    		<ref bean="writeItemDao" />
+    	</property>
+    </bean>   
+        <bean id="testSystemService" class="cn.edu.ustc.ttcn.itsec.service.TestSystemServiceImpl">
+    	<property name="testSystemDao">
+    		<ref bean="testSystemDao" />
+    	</property>
+    	<property name="showSystemInfoDao">
+    		<ref bean="showSystemInfoDao" />
+    	</property>
+    	<property name="systemTesterDao">
+    		<ref bean="systemTesterDao" />
+    	</property>
+    	<property name="testerDao">
+    		<ref bean="testerDao" />
+    	</property>
+    </bean> 
+    <bean id="testObjectService" class="cn.edu.ustc.ttcn.itsec.service.TestObjectServiceImpl">
+    	<property name="testObjectDao">
+    		<ref bean="testObjectDao" />
+    	</property>
+    	<property name="selectObjectDao">
+    		<ref bean="selectObjectDao"/>
+    	</property>
+    	<property name="writeItemDao">
+    		<ref bean="writeItemDao"/>
+    	</property>
+    	<property name="scoreDao">
+    		<ref bean="scoreDao"/>
+    	</property>
+    	<property name="conScoreDao">
+    		<ref bean="conScoreDao" />
+    	</property>
+    	<property name="itemConDao">
+    		<ref bean="itemConDao" />
+    	</property>
+    </bean>
+    <bean id="showObjectService" class="cn.edu.ustc.ttcn.itsec.service.ShowObjectServiceImpl">
+    	<property name="showObjectDao">
+    		<ref bean="showObjectDao" />
+    	</property>
+    	
+    </bean>
+    <bean id="systemService" class="cn.edu.ustc.ttcn.itsec.service.SystemServiceImpl">
+    	<property name="systemDao">
+    		<ref bean="systemDao" />
+    	</property>
+    </bean>
+    <bean id="showItemService" class="cn.edu.ustc.ttcn.itsec.service.ShowItemServiceImpl">
+    	<property name="showItemDao">
+    		<ref bean="showItemDao" />
+    	</property>
+    </bean>
+    
+    	
+    
+    <bean id="investInforService" class="cn.edu.ustc.ttcn.itsec.service.InvestInforServiceImpl">
+    	<property name="investInforDao">
+    		<ref bean="investInforDao"/>
+    	</property>
+    	<property name="showSystemInfoDao">
+    		<ref bean="showSystemInfoDao" />
+    	</property>
+    	<property name="companyDao">
+    		<ref bean="companyDao" />
+    	</property>
+    </bean>
+    <bean id="reportService" class="cn.edu.ustc.ttcn.itsec.service.ReportServiceImpl">
+    	<property name="showSystemInfoDao">
+    		<ref bean="showSystemInfoDao" />
+    	</property>
+    	<property name="testSystemDao">
+    		<ref bean="testSystemDao" />
+    	</property>
+    	<property name="showObjectDao">
+    		<ref bean="showObjectDao" />
+    	</property>
+    	<property name="showItemDao">
+    		<ref bean="showItemDao" />
+    	</property>
+    	<property name="reportDao">
+    		<ref bean="reportDao" />
+    	</property>
+    	<property name="scoreDao">
+    		<ref bean="scoreDao" />
+    	</property>
+    	<property name="conScoreDao">
+    		<ref bean="conScoreDao" />
+    	</property>
+    	<property name="itemConDao">
+    		<ref bean="itemConDao" />
+    	</property>
+    </bean>
+    
+    <bean id="moService" class="cn.edu.ustc.ttcn.itsec.service.MOServiceImpl">
+    	<property name="systemDao">
+    		<ref bean="systemDao" />
+    	</property>
+    	<property name="showSystemInfoDao">
+    		<ref bean="showSystemInfoDao" />
+    	</property>
+    	<property name="testSystemDao">
+    		<ref bean="testSystemDao" />
+    	</property>
+    	<property name="projectsDao">
+    		<ref bean="projectsDao" />
+    	</property>
+    </bean>
+    
+    <bean id="testerService" class="cn.edu.ustc.ttcn.itsec.service.TesterServiceImpl">
+    	<property name="testerDao">
+    		<ref bean="testerDao" />
+    	</property>
+    </bean>
+    
+    <bean id="requestProNumService" class="cn.edu.ustc.ttcn.itsec.service.RequestProNumServiceImpl">
+		<property name="proNumDao">
+			<ref bean="proNumDao" />
+		</property>    
+    </bean>
+    
+    <!-- more bean definitions go here -->
+
+</beans>

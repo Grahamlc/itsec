@@ -1,0 +1,40 @@
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="check.jsp" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+   <title>USTC-ITSEC信息管理平台</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" >
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+		<link rel="shortcut icon" href="images/title.jpg" type="image/x-icon">
+		<style type="text/css">
+			body {
+			 margin: 0px;padding:0;
+			 background-color:#eef3f7;
+			}
+			.my-table{width:95%;}
+		</style>
+	</head>
+	<body class="container-fluid">
+		<br><br>
+		<div class="tag" id="d5" >
+			<!-- 测评报告 --><br>
+			<table class="table my-table table-bordered">
+			
+			<s:iterator value="reports">
+			<tr>
+			<td><a href="out/${fileName}.doc" target="_blank">${name}</a></td>
+			<td>${time}</td>
+			</tr>
+			</s:iterator>
+			</table>
+		</div>  
+		<div class="navbar-fixed-bottom container span12 ">
+        <p class=" text-center ">&copy;中国科学技术大学信息安全测评中心&nbsp;&nbsp;&nbsp;&nbsp;地址：邮编：  <a href="http://itsec.ustc.edu.cn/contact.php">联系我们</a></p>
+        <p class="text-center"></p>
+		</div>
+	</body>
+</html>

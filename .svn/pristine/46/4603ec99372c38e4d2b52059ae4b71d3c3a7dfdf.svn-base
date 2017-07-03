@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.edu.ustc.ttcn.itsec.model.TestObject" table="d_cp_testobject" lazy="false">
+		<id name="autoId" column="AutoId" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+
+		<many-to-one name="pro" column="ProId" />
+		<many-to-one name="device" column="DeviceId" unique="true" />
+
+		<many-to-one name="object" column="ObjectId" />
+		 
+		<set name="testObjectItems" order-by="autoId" inverse="true" cascade="delete">
+			<key column="ObjectId" ></key>
+			<one-to-many class="cn.edu.ustc.ttcn.itsec.model.ItemSelRes"/>
+			
+		</set>
+		<property name="name" column="Name"/>
+	</class>
+</hibernate-mapping>

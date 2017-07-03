@@ -1,0 +1,25 @@
+package cn.edu.ustc.ttcn.itsec.service;
+
+import java.util.List;
+
+import cn.edu.ustc.ttcn.itsec.dao.TesterOfSystemDao;
+import cn.edu.ustc.ttcn.itsec.model.Tester;
+
+public class TesterServiceImpl implements TesterService {
+	private TesterDao testerDao;
+	
+	public TesterDao getTesterDao() {
+		return testerDao;
+	}
+
+	public void setTesterDao(TesterDao testerDao) {
+		this.testerDao = testerDao;
+	}
+
+	@Override
+	public List<Tester> showAll() {
+		// TODO Auto-generated method stub
+		return testerDao.showAll();
+	}
+
+}

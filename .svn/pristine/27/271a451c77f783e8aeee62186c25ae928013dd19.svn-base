@@ -1,0 +1,181 @@
+package cn.edu.ustc.ttcn.itsec.actions;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+
+import cn.edu.ustc.ttcn.itsec.model.Menu_Priv;
+import cn.edu.ustc.ttcn.itsec.model.Privilege;
+import cn.edu.ustc.ttcn.itsec.model.User;
+import cn.edu.ustc.ttcn.itsec.service.LoginService;
+
+import com.opensymphony.xwork2.ActionContext;
+
+/**
+ * @author ZYZ
+ * 注：
+ * (1)
+ * 实现ServletRequestAware，可以通过IoC的方式由Struts框架获得HttpServletRequest对象
+ * 实现ServletResponseAware，可以通过IoC的方式由Struts框架获得HttpServletResponse对象
+ * 实现SessionAware，可以通过IoC的方式由Struts框架获得Session对象
+ * 实现ServletContextAware，可以通过IoC的方式由Struts框架获得ServletContext对象
+ * 实现ApplicationAware，可以通过IoC的方式由Struts框架获得Application对象
+ * 需要哪个对象实现哪个接口
+ * (2)
+ * Action中的execute()函数主要作用是接受前端请求，调用相应的Service操作获得结果并返回
+ * (3)
+ * 一般情况下，将service操作返回的结果组织成json格式的字符串,通过returnResult页面返回到Android客户端
+ * 视情况而定，也可以用其他方法返回结果
+ * (4)
+ * 不同的业务请求实现相应的Action
+ */
+public class LoginAction implements ServletRequestAware, ServletResponseAware {
+	
+	private LoginService loginService;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	private String resultJson;
+	private Set<Menu_Priv> it ;
+	private int corId;
+	
+	
+	public int getCorId() {
+		return corId;
+	}
+	public void setCorId(int corId) {
+		this.corId = corId;
+	}
+	public Set<Menu_Priv> getIt() {
+		return it;
+	}
+	public void setIt(Set<Menu_Priv> it) {
+		this.it = it;
+	}
+	public String getResultJson() {
+		return resultJson;
+	}
+	public void setResultJson(String resultJson) {
+		this.resultJson = resultJson;
+	}	
+	public LoginService getLoginService() {
+		return loginService;
+	}
+	public void setLoginService(LoginService loginService) {
+		this.loginService = loginService;
+	}
+
+
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+
+	public HttpServletResponse getResponse() {
+		return response;
+	}
+	public void setResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+	@Override
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+		
+	}
+	
+	public String login() throws Exception{
+	
+		
+		/*get userId userPasswd from client
+		 * */
+		
+		String userId = request.getParameter("userId");
+		String userPasswd = request.getParameter("password");
+
+		User tempUser = new User();;
+		it = new HashSet<Menu_Priv>();
+		
+		tempUser = loginService.query(userId);	
+		
+		/*检查返回数据对象是否为空* */	
+		if(tempUser!=null){
+			int Privilege = tempUser.getLevel().getAutoId();
+			String Passwd = tempUser.getPasswd();	
+			it = tempUser.getLevel().getMenuPriv();
+						
+			try{
+				if(Passwd.equals(userPasswd)){
+					//该用户所属单位Id
+//					corId = tempUser.getAccount().getCorId();
+					corId = tempUser.getTester().getCompany().getCorId();
+					
+					//session保存登陆信息
+//					request.getSession().setAttribute("realName", realName);
+					//设置session超时时间，也可以在web.xml中设置
+				//	request.getSession().setMaxInactiveInterval(30*60);
+					
+				
+					ActionContext ctx = ActionContext.getContext();
+					Map<String, Object> session = ctx.getSession();
+					session.put("user", tempUser);
+					session.put("role", Privilege);
+					session.put("corId", corId);
+					session.put("menuPriv", it);
+					
+					//myWorks  该账户所参与的被测系统
+					session.put("myWorks", tempUser.getTester().getTesterToSystem());
+
+					if(Privilege==5 ) //5代表超级管理员
+					{
+						return "super";
+					}
+//					if(Privilege==4){ //4代表测评师
+//						return "tester";		
+//					}
+					if(Privilege == 4|| Privilege==3 || Privilege==2){ //2代表商务，3代表主任
+						return "Main";		
+					}
+					if(Privilege==1){ //1代表客户单位
+						return "guest";
+					}
+				}
+					
+				else return "fail";
+			}
+			catch(Exception e){
+				return "fail";
+			}
+		}
+		/*若返回数据对象为空，重定向到登陆界面*/
+		return "fail";
+	}
+	
+	public String logout() throws Exception{
+		Map session = ActionContext.getContext().getSession();
+//		Map session = (Map) request.getSession();
+//		session.clear() 彻底清除session
+		session.clear();
+		
+//		或者使用session.remove(key) 去除session中的属性
+//		session.remove("realName");
+				
+		return "logout";
+	}
+	
+}

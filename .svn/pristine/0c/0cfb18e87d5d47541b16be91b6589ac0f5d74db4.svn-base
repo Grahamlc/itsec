@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  
+    "http://struts.apache.org/dtds/struts-2.0.dtd">  
+      
+<struts>
+	<package name="login" namespace="/" extends="struts-default">
+		
+		<!-- 自定义的拦截器 
+		<interceptors >
+			<interceptor name="authority" class="cn.edu.ustc.ttcn.itsec.interceptor.AuthorityInterceptor" />
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+		-->
+		<!-- 为该package配置默认的拦截器 ，每个包只能指定一个默认的拦截器
+		即：所有未制定拦截器的action都是用默认的拦截器
+		<default-interceptor-ref name ="defaultStack" />
+		-->		
+		<action name="Login" class="cn.edu.ustc.ttcn.itsec.actions.LoginAction">
+			<result name="super" type="redirect">/Super.jsp</result>
+			<result name="Main" type="redirectAction">
+				<param name="url">guide.jsp</param>
+				<param name="actionName">showCompanys</param>
+			</result>
+			<result name="tester" type="redirect">
+				/Myjob.jsp
+			</result>
+			<result name="guest" type="redirectAction">
+				<param name="corId">${corId}</param>
+				<param name="url">Guest.jsp</param>
+				<param name="actionName">showMCor</param>
+			</result>
+			<result name="logout">/index.html</result>
+			<result name="fail">/error.html</result>
+		</action>
+
+		<action name="adduser" class="cn.edu.ustc.ttcn.itsec.actions.ShowCompanys">
+			<result name="success" >/adduser.jsp</result>
+			<result name="fail">/Maright.jsp</result>
+		</action>
+		<action name="super" class="cn.edu.ustc.ttcn.itsec.actions.Super">
+			<result name="success">/Maright.jsp</result>
+			<result name="fail">/Maright.jsp</result>
+			<result name="sucAddUser" type="redirectAction">
+				<param name="actionName">super!showUser</param>
+			</result>
+			<result name="sucAddTester" type="redirectAction">
+				<param name="actionName">super!showTester</param>
+			</result>
+			<result name="sucEditRole" type="redirectAction">
+				<param name="actionName">super!showRole</param>
+			</result>
+			
+			<result name="sucAddRole" type="redirectAction">
+				<param name="actionName">super!showRole</param>
+			</result>
+			
+			<result name="sucEditTester" type="redirectAction">
+				<param name="actionName">super!showTester</param>
+			</result>
+		</action>
+		
+		
+
+		<action name="changePass" class="cn.edu.ustc.ttcn.itsec.actions.ChangePasswd">
+			<result name="success" type="redirectAction">				
+				<param name="actionName">Login!logout.action</param>
+			</result>
+			
+		</action>
+		<action name="showCompanys" class="cn.edu.ustc.ttcn.itsec.actions.ShowCompanys">
+			<result name="success">/guide.jsp </result>	
+			<result name = "super">/Maright.jsp</result>
+		</action>
+	
+		
+	</package>
+	
+	 
+	<package name="interceptor" extends="struts-default" namespace="/">
+	
+		<interceptors >	
+			<interceptor name="authority" class="cn.edu.ustc.ttcn.itsec.interceptor.Interceptor" />	
+			<interceptor-stack name="mydefault">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>	
+		<default-interceptor-ref name="mydefault" />
+		
+		<global-results>
+		<!-- 全局 返回 值 -->    
+			<result name="login" type="redirect">/index.html</result>
+			<result name="fail" type="redirect">/error.html</result>
+			<!-- 返回首页 -->
+			<result name="firstPage" type="redirectAction">
+				<param name="url">guide.jsp</param>
+				<param name="actionName">showCompanys</param>
+			</result>
+			<!-- 返回项目管理模块 -->
+			<result name="MainPage" type="redirect">
+				Main.jsp?proId=${proId}
+			</result>
+			<!-- 返回项目信息模块 -->
+			<result name="mProjectInfo" type="redirectAction">
+				
+				<param name="proId">${proId}</param>
+				<param name="url">Cp_0.jsp</param>
+				<param name="actionName">showMPro</param>
+			</result>
+			<!-- 返回单位信息模块 -->
+			<result name="mCompanyInfo" type="redirectAction">
+				<param name="corId">${corId}</param>
+				<param name="url">Cp_1.jsp</param>
+				<param name="actionName">showMCor</param>
+			</result>
+		</global-results>
+					
+	</package>
+  
+  	<package name="others" extends="interceptor" namespace="/">
+  		
+  		<action name="wordbuild" class="cn.edu.ustc.ttcn.itsec.actions.WordBuild" method="createWord">
+			<result name="success" type="redirectAction">
+				<param name="testSysId">${testSysId}</param>
+				<param name="timeStr">${timeStr}</param>
+				<param name="actionName">report</param>
+			</result>
+		</action>
+		<action name="report" class="cn.edu.ustc.ttcn.itsec.actions.Report">
+			<result name="report">/Cp_5.jsp</result>
+			<result name="noreports" type="redirectAction">
+				<param name="testSysId">${testSysId}</param>
+				<param name="actionName">wordbuild</param>
+			</result>
+		</action>
+		
+		<action name="newObject" class="cn.edu.ustc.ttcn.itsec.actions.NewObject">
+			<result name="success" type="redirectAction">
+				<param name="sysId">${sysId}</param>
+				<param name="corId">${corId}</param>
+				<param name="url">${url}</param>
+				<param name="mark">${mark}</param>
+				<param name="actionName">showObject</param>
+			</result>
+		</action>
+		
+		<!-- 创建项目 -->
+		<action name="newProject" class="cn.edu.ustc.ttcn.itsec.actions.NewProjects">
+			<!-- 
+			<result name="projects" type="redirectAction">
+				<param name="url">guide.jsp</param>
+				<param name="actionName">showCompanys</param>
+			</result>
+			 -->
+		</action>
+		<!-- 更新单位信息 -->
+		<action name="editCompany" class="cn.edu.ustc.ttcn.itsec.actions.EditCompany">
+			
+		</action>
+		<!-- 追加任务单 -->
+		<action name="MO" class="cn.edu.ustc.ttcn.itsec.actions.MO">
+			<!--
+			<result name="success" type="redirectAction">
+				
+				<param name="proId">${proId}</param>
+				<param name="url">Cp_0.jsp</param>
+				<param name="actionName">showMPro</param>
+			</result>
+			-->
+		</action>
+		
+		<action name="showDevice" class="cn.edu.ustc.ttcn.itsec.actions.ShowAllDevice">
+			<result name="success">/Cp_9.jsp</result>
+		</action>  
+		
+		<action name= "addCompany" class="cn.edu.ustc.ttcn.itsec.actions.AddCompany">
+			<result name="addcompany" type="redirectAction">
+				<param name="url">guide.jsp</param>
+				<param name="actionName">showCompanys</param>
+			</result>
+		</action>
+		
+		<action name="showMCor" class="cn.edu.ustc.ttcn.itsec.actions.ShowCompanys" method="showMCom">
+			<result name="success">/${url}</result>
+		</action>
+		
+		<action name="showMPro" class="cn.edu.ustc.ttcn.itsec.actions.ShowProjects" method="showMPro">
+			<result name="Mproject">/${url}</result>
+		</action>
+		
+		<action name="showMPros" class="cn.edu.ustc.ttcn.itsec.actions.ShowProjects" method="showMPros">
+			<result name="Mprojects">/${url}</result>
+		</action>
+		
+		<action name="showSysteminfo" class="cn.edu.ustc.ttcn.itsec.actions.ShowSystemInfo">
+			<result name="success">/${url}</result>
+		</action>
+		<action name="showInformation" class="cn.edu.ustc.ttcn.itsec.actions.Investigation" method="showInvest">			
+			<result name="success">/${url}</result>
+		</action>
+		<action name="insert" class="cn.edu.ustc.ttcn.itsec.actions.InsertInvestData">
+			
+			<result name="success" type="redirectAction">
+				<param name="corId">${sysId}</param>
+				<param name="url">${url}</param>
+				<param name="actionName">showInformation</param>
+			</result>
+		</action>
+		<action name="delete" class="cn.edu.ustc.ttcn.itsec.actions.Delete">
+			<result name="dUser">/Maright.jsp</result>
+			<result name="dObject" type="redirectAction">
+				<param name="sysId">${sysId}</param>
+				<param name="corId">${corId}</param>
+				<param name="url">${url}</param>
+				<param name="mark">${mark}</param>
+				<param name="actionName">showObject</param>
+			</result>
+			<result name="dTester" type="redirectAction">
+				<param name="actionName">super!showTester</param>
+			</result>
+			<result name = "dSys" type = "redirectAction">
+				<param name="actionName">showCompanys?url=Maleft.jsp</param>
+			</result>
+		</action>
+		
+		
+		
+		<action name="selectObjectItem" class="cn.edu.ustc.ttcn.itsec.actions.SelectObject" method="selectObject">
+			<result name="success">/CpForm.jsp</result>
+			<result name="fail">/error.html</result>
+		</action>
+		
+		
+		<action name="showTester" class="cn.edu.ustc.ttcn.itsec.actions.ShowTester">
+			<result name="testers">${url}</result>
+		</action>
+		
+			
+		<action name="submitResult" class="cn.edu.ustc.ttcn.itsec.actions.WriteItem">
+			<result name="success" type="redirectAction">
+				<param name="id">${id}</param>
+				<param name="actionName">showItem</param>
+			</result>
+			
+			
+		</action>	
+		
+		<action name="showObject" class="cn.edu.ustc.ttcn.itsec.actions.ShowTestObject">
+			<result name="success">/${url}</result>
+			<result name="history">/Cp_8.jsp</result>
+		</action>
+		<action name="addSystem" class="cn.edu.ustc.ttcn.itsec.actions.AddSystem">
+			<result name="success" type="redirectAction">
+				<param name="corId">${corId}</param>
+				<param name="url">${url}</param>
+				<param name="actionName">showMCor</param>
+			</result>
+		</action>
+		<action name="showItem" class="cn.edu.ustc.ttcn.itsec.actions.ShowItem">
+			<result name="success">/CpForm.jsp</result>
+		</action>
+		<action name="startTest" class="cn.edu.ustc.ttcn.itsec.actions.StartTest">
+			<result name="success">/Myjob.jsp</result>
+			<result name="manager" type="redirectAction">
+				<param name="url">${url}</param>
+				<param name="corId">${corId}</param>
+				<param name="actionName">showMCor</param>
+			</result>
+		</action>
+		
+		<action name="roleFileUpload" class="cn.edu.ustc.ttcn.itsec.actions.RoleFileUpload" method="PoiServlet">
+			<result name="success" type="redirectAction">
+				<param name="url">Information.jsp</param>
+				<param name="corId">${proId}</param>
+				<param name="actionName">showInformation</param>
+			</result>
+		</action>
+		
+		<action name="showMTestSys" class="cn.edu.ustc.ttcn.itsec.actions.ShowMTestSystem">
+			<result name="testSystem">${url}</result>
+		</action>
+		<!-- 得到所有的项目 -->
+		<action name="showProjects" class="cn.edu.ustc.ttcn.itsec.actions.ShowProjects">
+			<result name="allProjects">${url}</result>
+		</action>
+		  
+  	</package>
+</struts>

@@ -1,0 +1,65 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.url">jdbc:mysql://192.168.1.66:3306/itsec</property>
+        
+        <!--解决 Hibernate MySql UTF-8 -->
+        <property name="connection.useUnicode">true</property>
+		<property name="connection.characterEncoding">UTF-8</property>
+
+        <property name="connection.username">hxu</property>
+        <property name="connection.password">hanxu</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="show_sql">true</property>
+		<property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		
+		<!-- 解决  由于mysql超时 导致程序出现错误   Mysql重连，连接丢失的问题 -->
+		<property name="connection.autoReconnect">true</property>
+		<property name="connection.autoReconnectForPools">true</property>
+		<property name="connection.is-connection-validation-required">true</property>
+		
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Device.hbm.xml"/>
+		
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Item.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/ItemSelRes.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Company.hbm.xml"/>
+		
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Systems.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Projects.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/TestSystem.hbm.xml"/>
+		
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Role.hbm.xml"/>
+
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Tester.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/TestObject.hbm.xml"/>
+		
+		
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/TesterOfSystem.hbm.xml"/>
+
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/User.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Objects.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Privilege.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Menu.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Menu_Priv.hbm.xml"/>
+		
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/ManageFile.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/MainData.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/HostMemory.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/SecDevice.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/NetDevice.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/RelaPeople.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/AppSoft.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Reports.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Physices.hbm.xml"/>
+		
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/Score.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/ItemCon.hbm.xml"/>
+		<mapping resource="cn/edu/ustc/ttcn/itsec/model/ConScore.hbm.xml"/>
+
+	</session-factory>
+</hibernate-configuration>

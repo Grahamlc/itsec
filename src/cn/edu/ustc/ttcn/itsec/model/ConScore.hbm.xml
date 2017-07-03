@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+	<class name="cn.edu.ustc.ttcn.itsec.model.ConScore" table="d_cp_controlscore" lazy="false">
+		<id name="autoId" column="AutoId" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		<many-to-one name="testSystem" column="TestSystem" />
+		
+		<many-to-one name="itemCon" column="SecCon" /><!-- 安全控制点 -->
+		
+		<property name="itemConScore" column="SecConScore" />  <!-- 安全控制点得分 -->
+		<property name="weighs" column="Weighes"/> <!-- 改控制点的测评项权重和 -->
+	</class>
+
+</hibernate-mapping>

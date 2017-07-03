@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+	
+	<!-- 配置sessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+    </bean>
+    
+    <!-- 配置事物管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    	<property name="sessionFactory" >
+    		<ref bean="sessionFactory"/>
+    	</property>
+    </bean>
+    
+    <!-- 配置事物的传播特性 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    	<tx:attributes>
+    		<tx:method name="add*" propagation="REQUIRED" />
+    		<tx:method name="modify*" propagation="REQUIRED" />
+    		<!-- 根据相应的方法名进行添加或修改 -->
+    		<tx:method name="*" read-only="false"/>
+    	</tx:attributes>
+    </tx:advice>
+    
+    <!-- 事物作用的类及其方法 -->
+   	<aop:config>
+   		<!-- 将事物添加在业务处理层上的操作即service上操作 -->
+   		<aop:pointcut expression="execution(* cn.edu.ustc.ttcn.itsec.service.*.*(..))" id="allServiceMethod"/>
+   		<aop:advisor advice-ref="txAdvice" pointcut-ref="allServiceMethod"/>
+   	</aop:config>
+    
+    <!-- more bean definitions go here -->
+
+</beans>

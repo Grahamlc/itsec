@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+
+<hibernate-mapping>
+
+	<class name="cn.edu.ustc.ttcn.itsec.model.User" table="s_te_itsec">
+		<id name="autoId" column="AutoId" type="java.lang.Integer" length="10" >
+			<generator class="increment" />
+		</id>
+		<property  name="userId" column="UserId" />
+		
+		<many-to-one name= "account" column="Account" />
+		
+		<property  name="passwd" column="Passwd"  />
+		<many-to-one name="tester" column="Name" />
+				
+		<many-to-one name="level" column="Role"/>
+		<!-- 
+		<set name="systems" >
+			<key column="UserId"></key>
+			<one-to-many class="cn.edu.ustc.ttcn.itsec.model.TesterOfSystem"/>
+		</set>
+	 -->
+	</class>
+	
+</hibernate-mapping>

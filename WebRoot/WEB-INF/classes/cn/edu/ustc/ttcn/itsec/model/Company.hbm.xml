@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+	<class name="cn.edu.ustc.ttcn.itsec.model.Company" table="s_te_company" lazy="false">
+		<id name="corId" column="CorId" type="java.lang.Integer" length="20">
+			<generator class="increment"></generator>
+		</id>
+		<property name="corName" column="CorName"  not-null="true"/>
+		<property name="corAdd" column="CorAdd" />
+		<property name="connUser" column="ConnUser" />
+		<property name="userBm" column="UserBm" />
+		<property name="corTel" column="CorTel" />
+		
+		<property name="connPhon" column="UserPhon" />
+		<property name="connMail" column="UserMail" />
+		<property name="postCode" column="PostCode" />
+		
+		<property name="status" column="Status" />
+		<property name="area" column="Area"/>
+
+		<property name="userTitle" column="UserTitle"/>
+		
+		<set name="systems" order-by="autoId" lazy="false" cascade="delete" inverse="true">
+			<key column="CorId"></key>
+			<one-to-many class="cn.edu.ustc.ttcn.itsec.model.Systems"/>
+		</set>
+		
+		<set name="projects" order-by="autoId" lazy="false" cascade="delete" inverse="true">
+			<key column="Company"></key>
+			<one-to-many class="cn.edu.ustc.ttcn.itsec.model.Projects"/>
+		</set>
+	</class>
+</hibernate-mapping>

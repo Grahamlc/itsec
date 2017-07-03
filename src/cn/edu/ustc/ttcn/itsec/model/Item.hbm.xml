@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+	<class name="cn.edu.ustc.ttcn.itsec.model.Item" table="s_te_item" lazy="false">
+		<id name="itemId" column="AutoId" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		<property name="handleId" column="HandleID" />
+		<property name="leiBie" column="Class" />  <!-- 类别 -->
+		<property name="object" column="SecConLaySN" /><!-- 测评对象 -->
+		<property name="bianHao" column="ItemSN" />
+		<property name="cpZhBiao" column="ItemCon" />
+		<property name="cpxBh" column="ItemSubSN" />  <!-- 测评项编号 -->
+		<property name="cpxCon" column="ItemSubCon" /><!-- 测评项内容 -->
+		<property name="weigh" column="Weight" />
+		<property name="quAn" column="QuAn" /><!-- 问题分析 -->
+		<property name="advice" column="Advice" /><!-- 整改建议 -->
+		
+	</class>
+
+</hibernate-mapping>
